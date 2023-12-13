@@ -1,14 +1,8 @@
 import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.function.*;
-import java.util.regex.*;
-import java.util.stream.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
 class Result2 {
 
@@ -21,9 +15,20 @@ class Result2 {
 
     public static int lonelyInteger(List<Integer> a) {
         Map<Integer, Integer> myMap = new TreeMap<>();
-
-        return 0;
-
+        final int[] theUniqueValue = {0};
+        for(int i : a){
+            if(myMap.containsKey(i)){
+                myMap.put(i, myMap.get(i)+1);
+            }else {
+                myMap.put(i, 1);
+            }
+        }
+        myMap.forEach((k,v) -> {
+           if(myMap.get(k) == 1)
+               theUniqueValue[0] = k;
+        });
+        System.out.println(theUniqueValue[0]);
+        return theUniqueValue[0];
     }
 }
 
